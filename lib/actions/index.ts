@@ -18,6 +18,7 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     let product = scrapedProduct;
     const existingProduct = await Product.findOne({url: scrapedProduct.url});
 
+    // if product has been searched
     if (existingProduct) {
       const updatedPriceHistory: any = [...existingProduct.priceHistory, {price: scrapedProduct.currentPrice}];
 
@@ -31,8 +32,10 @@ export async function scrapeAndStoreProduct(productUrl: string) {
     }
 
     const newProduct = await Product.findOneAndUpdate({url: scrapedProduct.url}, product, {upsert: true, new: true});
-
-    revalidatePath(`/products/${newProduct._id}`);
+    const newUrl = `/products/${newProduct._id}`;
+    revalidatePath(newUrl);
+    return newUrl;
+    //
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`);
   }
