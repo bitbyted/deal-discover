@@ -6,7 +6,6 @@ import {connectToDB} from '../mongoose';
 import {scrapeAmazonProduct} from '../scraper';
 import {getAveragePrice, getHighestPrice, getLowestPrice} from '../utils';
 import {User} from '@/types';
-import exp from 'constants';
 import {generateEmailBody, sendEmail} from '../nodemailer';
 
 export async function scrapeAndStoreProduct(productUrl: string) {

@@ -17,7 +17,6 @@ const Modal = ({productId}: Props) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    console.log(productId, email);
     await addUserEmailToProduct(productId, email);
 
     setIsSubmitting(false);

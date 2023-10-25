@@ -1,6 +1,6 @@
 'use client';
 import {scrapeAndStoreProduct} from '@/lib/actions';
-import Link from 'next/link';
+
 import React, {FormEvent, useState} from 'react';
 import {useRouter} from 'next/navigation';
 
@@ -29,6 +29,7 @@ const Searchbar = () => {
       const productUrl = await scrapeAndStoreProduct(searchPrompt);
       if (productUrl) router.push(productUrl);
     } catch (error) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
